@@ -11,3 +11,20 @@
 #root {
   height: 100vh;
 }
+
+/* sizing of map container */
+.leaflet-container {
+  height: 100vh;
+}
+
+.leaflet-popup-content {
+  margin: 8px !important;
+}
+
+.leaflet-popup-content th, td {
+  padding: 0 4px;
+}
+
+.leaflet-popup-content th {
+  color: green;
+}
