@@ -1,4 +1,3 @@
-import React from 'react'
 import { 
   ResponsiveContainer,
   AreaChart,
@@ -9,8 +8,9 @@ import {
   Tooltip,
   Legend
 } from 'recharts';
+import { NeighborhoodData } from './types';
 
-export default function NeighborhoodChart({ neighborhoodData }) {
+export default function NeighborhoodChart({ neighborhoodData }: { neighborhoodData: NeighborhoodData[] }) {
   return (
     <>
       <h4>Nome</h4>

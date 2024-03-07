@@ -12,9 +12,9 @@ import Typography from '@mui/material/Typography';
 import AppBar from './ui/AppBar';
 import theme from './ui/theme';
 
-import LeafletMap from './LeafletMap'
+import LeafletMap from './bairros/mapa/LeafletMap'
 import geojsonData from './geometria-bairros.json'
-import NeighborhoodDash from './NeighborhoodDash';
+import NeighborhoodDash from './bairros/demografia/NeighborhoodDash';
 
 
 export default function App() {

@@ -2,35 +2,29 @@ import React from 'react'
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
-import graphImage from './graph.png'
+import graphImage from '../../assets/graph.png'
 
-import neighborhoodData from './populacao_bairros.json'
+import { NeighborhoodData } from './types'
 import NeighborhoodChart from './NeighborhoodChart'
+import groupBy from '../../utils/groupBy'
+
 
 export default function NeighborhoodDash () {
-  const [groupedNeighborhoood, setGroupedNeighborhoood] = React.useState()
+  const [neighborhoodData, setNeighborhoodData] = React.useState<NeighborhoodData[]>([])
+  const [groupedNeighborhoood, setGroupedNeighborhoood] = React.useState<Record<string, NeighborhoodData[]>>()
 
-  function groupBy <T>(list: Array<T>) {
-    const map = new Map()
-    list.forEach((item) => {
-        const collection = map.get(item.id_geometria)
-        if (!collection) {
-            map.set(item.id_geometria, [item])
-        } else {
-            collection.push(item)
-        }
-    })
-    return map
-  }
-  
   React.useEffect(() => {
-    const groupedData = groupBy(neighborhoodData)
-    setGroupedNeighborhoood(groupedData.get(1))
+    fetch('api/bairros/populacao')
+      .then(res => res.json())
+      .then(data => setNeighborhoodData(data))
   }, [])
+
+  React.useEffect(() => {
+    const groupedData = groupBy(neighborhoodData, 'id_geometria')
+    setGroupedNeighborhoood(groupedData["1"])
+  }, [neighborhoodData])
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
@@ -47,7 +41,7 @@ export default function NeighborhoodDash () {
               height: 550,
             }}
           >
-            { neighborhoodData.length ?
+            { neighborhoodData.size ?
               <>
                 <NeighborhoodChart neighborhoodData={groupedNeighborhoood} />
                 <Typography color="black">
