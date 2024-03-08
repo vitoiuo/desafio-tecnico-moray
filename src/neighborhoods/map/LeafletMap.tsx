@@ -1,28 +1,28 @@
 import React from 'react'
 import { MapContainer, TileLayer } from 'react-leaflet'
-import { LatLngExpression } from '@types/leaflet'
+import { LatLngExpression } from 'leaflet'
 
-import { SelectedAreaContext } from '../../SelectedAreaContext'
-import { MultiPolygonGeojson } from './types'
+import { SelectedAreaContext } from '../SelectedAreaContext'
+import { MultiPolygonGeoJSON } from './types'
 import MapPlaceholder from './MapPlaceHolder'
 import ChangeView from './ChangeViewMap'
 import GeoJSONLayer from './GeoJSONLayer'
 
 export default function Map() {
+  const { setValue: setSelectedArea } = SelectedAreaContext.useValue()
   const [mapCenter, setMapCenter] = React.useState<LatLngExpression>([51.505, -0.09])
-  const [geojsonData, setGeojsonData] = React.useState<MultiPolygonGeojson | null>(null)
-  const { setSelectedArea } = React.useContext(SelectedAreaContext)
+  const [geoJSONData, setGeoJSONData] = React.useState<MultiPolygonGeoJSON | null>(null)
 
   React.useEffect(() => {
     fetch('api/bairros/geometria')
       .then(res => res.json())
-      .then(setGeojsonData)
+      .then(setGeoJSONData)
       .catch(e => console.error(e))
   }, [])
 
   React.useEffect(() => {
-    if (!geojsonData) return
-    const centers = geojsonData.features.map(feature => {
+    if (!geoJSONData) return
+    const centers = geoJSONData.features.map(feature => {
       if (!feature.bbox) return [0, 0]
       const [minLon, minLat, maxLon, maxLat] = feature.bbox
       return [(minLat + maxLat) / 2, (minLon + maxLon) / 2]
@@ -34,7 +34,7 @@ export default function Map() {
     ]
 
     setMapCenter(avgCenter)
-  }, [geojsonData])
+  }, [geoJSONData])
 
 
   return (
@@ -49,9 +49,9 @@ export default function Map() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       /> 
-      {geojsonData && (
+      {geoJSONData && (
         <GeoJSONLayer
-          data={geojsonData}
+          data={geoJSONData}
           pathOptions={{ color: 'green' }}
           setSelectedArea={setSelectedArea}
         />

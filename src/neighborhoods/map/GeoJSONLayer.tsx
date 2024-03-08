@@ -1,15 +1,24 @@
 import { GeoJSON, GeoJSONProps } from 'react-leaflet'
-import { GeoJSONOptions } from '@types/leaflet'
+import { GeoJSONOptions } from 'leaflet'
+import { NeighborhoodArea } from '../types'
 
 interface GeoJsonLayerProps extends GeoJSONProps {
-  setSelectedArea: React.Dispatch<React.SetStateAction<number | null>>
+  setSelectedArea: React.Dispatch<React.SetStateAction<NeighborhoodArea | null>>
 }
 
 export default function GeoJSONLayer ({ setSelectedArea, ...props}: GeoJsonLayerProps) {
   const onEachFeature: GeoJSONOptions['onEachFeature'] = (feature, layer) => {
     layer.on({
       click: function () {
+        console.log('hey')
         setSelectedArea(feature.properties)
+      },
+      tooltipopen: function () {
+        // Comparison
+        console.log('opening')
+      },
+      tooltipclose: function () {
+        console.log('closuse')
       }
     })
 

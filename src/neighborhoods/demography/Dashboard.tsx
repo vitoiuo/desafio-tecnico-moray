@@ -4,14 +4,14 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography'
 
-import { SelectedAreaContext } from '../../SelectedAreaContext'
+import { SelectedAreaContext } from '../SelectedAreaContext'
 import calcRatesOfChange, { RatesOfChange } from '../../utils/calcRatesOfChange'
 import { PopulationData } from './types'
 import CustomAreaChart from './CustomAreaChart'
 
 
-export default function PopulationDash () {
-  const { selectedArea } = React.useContext(SelectedAreaContext)
+export default function Dashboard () {
+  const { value: selectedArea } = SelectedAreaContext.useValue()
   const [populationData, setPopulationData] = React.useState<PopulationData[]>([])
   const [ratesOfChange, setRatesOfChange] = React.useState<RatesOfChange[]>([])
 

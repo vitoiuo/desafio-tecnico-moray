@@ -4,7 +4,7 @@ import './App.css'
 import 'leaflet/dist/leaflet.css'
 import CssBaseline from '@mui/material/CssBaseline'
 
-import { SelectedAreaProvider } from './SelectedAreaContext'
+import { SelectedAreaContext } from './neighborhoods/SelectedAreaContext'
 
 import { ThemeProvider } from '@mui/material/styles'
 import Box from '@mui/material/Box'
@@ -25,7 +25,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <SelectedAreaProvider >
+      <SelectedAreaContext.Provider>
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
           <Header
@@ -46,7 +46,7 @@ export default function App() {
 
           <MainContent />
         </Box>
-      </ SelectedAreaProvider>
+      </SelectedAreaContext.Provider>
     </ThemeProvider>
   )
 }

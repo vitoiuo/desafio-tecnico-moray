@@ -1,14 +1,16 @@
-import { render, waitFor } from '@testing-library/react'
-import { useMap } from 'react-leaflet'
-import ChangeView from "./ChangeViewMap"
+import { render } from '@testing-library/react'
+import ChangeView, { ChangeViewProps } from "./ChangeViewMap"
 
-vi.mock('react-leaflet', () => ({ useMap: vi.fn()}))
+const { setView } = vi.hoisted(() => {
+  return { setView: vi.fn() }
+})
+vi.mock('react-leaflet', () => (
+  { useMap: vi.fn().mockReturnValue({ setView })}
+))
 
-describe("ChangeViewMap", () => {
-  it("should render", async () => {
-    const setView = vi.fn()
-    const COMPONENT_PROPS = { center: [51.505, -0.09], zoom: 13 } 
-    useMap.mockReturnValue({ setView })
+describe('ChangeViewMap', () => {
+  it('should render', async () => {
+    const COMPONENT_PROPS: ChangeViewProps = { center: [51.505, -0.09], zoom: 13 } 
 
     render(<ChangeView {...COMPONENT_PROPS} />)
 
