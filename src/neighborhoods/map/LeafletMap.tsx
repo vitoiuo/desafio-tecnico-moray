@@ -39,7 +39,6 @@ export default function Map() {
 
   return (
     <MapContainer
-      dragging={false}
       center={mapCenter}
       zoom={13}
       style={{ height: "100%", width: "100%" }}

@@ -59,6 +59,7 @@ export default function PopulationDash () {
            <CustomAreaChart
               data={populationData}
               chartTitle="População pelos anos"
+              tooltipText='População'
               xAxisProp='ano'
               areaProp='populacao'
             />
@@ -79,9 +80,10 @@ export default function PopulationDash () {
           >
             <CustomAreaChart
               data={ratesOfChange}
+              chartTitle="Taxa de crescimento pelo anos"
+              tooltipText='Taxa de crescimento'
               xAxisProp='ano'
               areaProp='rateOfChange'
-              chartTitle="Taxa de crescimento pelo anos"
             />
           </Paper>
         </Grid>

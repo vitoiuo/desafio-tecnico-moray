@@ -1,7 +1,7 @@
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
-import MenuIcon from '@mui/icons-material/Menu'
+import MapIcon from '@mui/icons-material/Map';
 
 import AppBar from './AppBar'
 
@@ -30,7 +30,7 @@ export default function Header({ open, toggleDrawer, drawerwidth}: HeaderProps) 
             ...(open && { display: 'none' }),
           }}
         >
-          <MenuIcon />
+          <MapIcon />
         </IconButton>
         <Typography
           component="h1"

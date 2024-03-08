@@ -28,7 +28,7 @@ export default function GeoJSONLayer ({ setSelectedArea, ...props}: GeoJsonLayer
           <td>${feature.properties.zona}</td>
         </tr>
       </table>
-      `)
+    `)
   }
   
   return (

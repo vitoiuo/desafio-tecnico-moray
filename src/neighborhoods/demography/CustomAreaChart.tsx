@@ -7,17 +7,18 @@ import {
   CartesianGrid,
   XAxis,
   YAxis,
-  Tooltip,
+  Tooltip
 } from 'recharts'
 
-interface CustomAreaChartProps {
-  data: unknown[]
+export interface CustomAreaChartProps {
+  data: unknown[],
   chartTitle: string,
-  xAxisProp: string
-  areaProp: string
+  xAxisProp: string,
+  areaProp: string,
+  tooltipText?: string,
 }
 
-export default function CustomAreaChart({ data, chartTitle, xAxisProp, areaProp }: CustomAreaChartProps) {
+export default function CustomAreaChart({ data, chartTitle, tooltipText, xAxisProp, areaProp }: CustomAreaChartProps) {
   return (
     <>
       { data.length
@@ -36,7 +37,7 @@ export default function CustomAreaChart({ data, chartTitle, xAxisProp, areaProp 
             <CartesianGrid strokeDasharray="3 3"  />
             <XAxis dataKey={xAxisProp} />
             <YAxis />
-            <Tooltip />
+            <Tooltip formatter={(value, name, props) => [value, tooltipText]} />
             <Area
               type="monotone"
               dataKey={areaProp}

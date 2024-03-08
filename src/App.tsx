@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import './styles.css'
+import './App.css'
 import 'leaflet/dist/leaflet.css'
 import CssBaseline from '@mui/material/CssBaseline'
 
