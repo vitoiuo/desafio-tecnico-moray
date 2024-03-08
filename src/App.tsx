@@ -27,7 +27,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <SelectedAreaContext.Provider>
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex', maxHeight: '100vh' }}>
           <CssBaseline />
           <Header
             open={open}

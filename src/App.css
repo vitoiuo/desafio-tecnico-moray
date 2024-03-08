@@ -9,12 +9,12 @@
 }
 
 #root {
-  min-height: 100vh;
+  max-height: 100vh;
 }
 
 /* sizing of map container */
 .leaflet-container {
-  min-height: 100vh;
+  max-height: 100vh;
 }
 
 .leaflet-popup-content {
