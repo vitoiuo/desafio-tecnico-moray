@@ -1,7 +1,7 @@
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
-import MapIcon from '@mui/icons-material/Map';
+import MapIcon from '@mui/icons-material/Map'
 
 import AppBar from './AppBar'
 

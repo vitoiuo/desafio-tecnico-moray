@@ -1,7 +1,7 @@
 import React from 'react'
 
 interface ContextValue<T> {
-  value: T
+  value: T,
   setValue: React.Dispatch<React.SetStateAction<T>>
 }
 
@@ -20,12 +20,12 @@ export function createSelectedAreaContext<T>(defaultValue: T) {
         {children}
       </Context.Provider>
     )
-  };
+  }
 
   const useValue = () => {
-    const context = React.useContext(Context);
+    const context = React.useContext(Context)
     if (!context) {
-      throw new Error('useValue must be used within a Provider');
+      throw new Error('useValue must be used within a Provider')
     }
     return context
   }

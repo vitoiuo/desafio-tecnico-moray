@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { primaryColor } from '../../ui/theme';
+import { primaryColor } from '../../ui/theme'
 import { PopulationData } from './types'
 import calcRatesOfChange, { RatesOfChange } from '../../utils/calcRatesOfChange'
 
-import Paper from '@mui/material/Paper';
+import Paper from '@mui/material/Paper'
 import CustomAreaChart from './CustomAreaChart'
 
 

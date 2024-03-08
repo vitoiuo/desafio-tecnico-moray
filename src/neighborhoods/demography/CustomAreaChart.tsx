@@ -1,5 +1,5 @@
 import graphImage from '../../assets/graph.png'
-import Typography from '@mui/material/Typography';
+import Typography from '@mui/material/Typography'
 import { 
   ResponsiveContainer,
   AreaChart,
@@ -12,7 +12,7 @@ import {
 
 interface chartAreas {
   datakey: string,
-  color: string,
+  color: string
 }
 export interface CustomAreaChartProps {
   data: unknown[],
