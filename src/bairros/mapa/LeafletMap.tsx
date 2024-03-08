@@ -1,15 +1,23 @@
 import React from 'react'
 import { MapContainer, TileLayer } from 'react-leaflet'
-import { LatLngExpression, GeoJSON } from '@types/leaflet'
+import { LatLngExpression } from '@types/leaflet'
+
+import { SelectedAreaContext } from '../../SelectedAreaContext'
+import { MultiPolygonGeojson } from './types'
 import ChangeView from './ChangeViewMap'
 import GeoJSONLayer from './GeoJSONLayer'
 
-interface MapProps {
-  geojsonData: GeoJSON.FeatureCollection<GeoJSON.MultiPolygon>
-}
-
-export default function Map({ geojsonData }: MapProps) {
+export default function Map() {
   const [mapCenter, setMapCenter] = React.useState<LatLngExpression>([51.505, -0.09])
+  const [geojsonData, setGeojsonData] = React.useState<MultiPolygonGeojson | null>(null)
+  const { setSelectedArea } = React.useContext(SelectedAreaContext)
+
+  React.useEffect(() => {
+    fetch('api/bairros/geometria')
+      .then(res => res.json())
+      .then(setGeojsonData)
+      .catch(e => console.error(e))
+  }, [])
 
   React.useEffect(() => {
     if (!geojsonData) return
@@ -32,9 +40,9 @@ export default function Map({ geojsonData }: MapProps) {
     <MapContainer
       center={mapCenter}
       zoom={13}
-      style={{ height: "100vh", width: "100%" }}
+      style={{ height: "100%", width: "100%" }}
     >
-      <ChangeView center={mapCenter} zoom={13} />
+      <ChangeView center={mapCenter} zoom={14} />
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -43,6 +51,7 @@ export default function Map({ geojsonData }: MapProps) {
         <GeoJSONLayer
           data={geojsonData}
           pathOptions={{ color: 'green' }}
+          setSelectedArea={setSelectedArea}
         />
       )}
     </MapContainer>

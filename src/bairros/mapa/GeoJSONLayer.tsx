@@ -1,8 +1,18 @@
 import { GeoJSON, GeoJSONProps } from 'react-leaflet'
 import { GeoJSONOptions } from '@types/leaflet'
 
-export default function GeoJSONLayer (props: GeoJSONProps) {
+interface GeoJsonLayerProps extends GeoJSONProps {
+  setSelectedArea: React.Dispatch<React.SetStateAction<number | null>>
+}
+
+export default function GeoJSONLayer ({ setSelectedArea, ...props}: GeoJsonLayerProps) {
   const onEachFeature: GeoJSONOptions['onEachFeature'] = (feature, layer) => {
+    layer.on({
+      click: function () {
+        setSelectedArea(feature.properties.id)
+      }
+    })
+
     layer.bindTooltip(`
       <table class="leaflet-popup-content">
         <tr>

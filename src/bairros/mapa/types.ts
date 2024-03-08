@@ -1,0 +1,1 @@
+export interface MultiPolygonGeojson extends GeoJSON.FeatureCollection<GeoJSON.MultiPolygon> {}

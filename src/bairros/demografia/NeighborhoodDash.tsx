@@ -6,25 +6,22 @@ import Typography from '@mui/material/Typography';
 
 import graphImage from '../../assets/graph.png'
 
+import { SelectedAreaContext } from '../../SelectedAreaContext'
 import { NeighborhoodData } from './types'
 import NeighborhoodChart from './NeighborhoodChart'
-import groupBy from '../../utils/groupBy'
 
 
 export default function NeighborhoodDash () {
   const [neighborhoodData, setNeighborhoodData] = React.useState<NeighborhoodData[]>([])
-  const [groupedNeighborhoood, setGroupedNeighborhoood] = React.useState<Record<string, NeighborhoodData[]>>()
+  const { selectedArea } = React.useContext(SelectedAreaContext)
 
   React.useEffect(() => {
-    fetch('api/bairros/populacao')
+    const query = selectedArea ? `?id=${selectedArea}` : ''
+    fetch(`api/bairros/populacao${query}`)
       .then(res => res.json())
-      .then(data => setNeighborhoodData(data))
-  }, [])
-
-  React.useEffect(() => {
-    const groupedData = groupBy(neighborhoodData, 'id_geometria')
-    setGroupedNeighborhoood(groupedData["1"])
-  }, [neighborhoodData])
+      .then(setNeighborhoodData)
+      .catch(e => console.error(e))
+  }, [selectedArea])
 
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
@@ -41,15 +38,9 @@ export default function NeighborhoodDash () {
               height: 550,
             }}
           >
-            { neighborhoodData.size ?
-              <>
-                <NeighborhoodChart neighborhoodData={groupedNeighborhoood} />
-                <Typography color="black">
-                    Olii
-                </Typography>
-              </>
-              :
-              <>
+            { Object.keys(neighborhoodData).length
+              ? <NeighborhoodChart neighborhoodData={neighborhoodData} />
+              : (<>
                 <img
                   src={graphImage}
                   alt="Gráfico"
@@ -60,9 +51,9 @@ export default function NeighborhoodDash () {
                   Nenhum dado disponível
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  Escolha uma geometria no mapa para visualizar os dados
+                  Escolha uma área no mapa para visualizar os dados
                 </Typography>
-              </>
+              </>)
             }
           </Paper>
         </Grid>
