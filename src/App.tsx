@@ -4,7 +4,6 @@ import './App.css'
 import 'leaflet/dist/leaflet.css'
 import CssBaseline from '@mui/material/CssBaseline'
 
-import { SelectedAreaContext } from './neighborhoods/SelectedAreaContext'
 
 import { ThemeProvider } from '@mui/material/styles'
 import Box from '@mui/material/Box'
@@ -14,6 +13,8 @@ import Header from './ui/Header'
 import CustomToolbar from './ui/CustomToolbar'
 import MainContent from './MainContent'
 import LeafletMap from './neighborhoods/map/LeafletMap'
+
+import { SelectedAreaContext } from './neighborhoods/SelectedAreaContext'
 
 export default function App() {
   const DRAWER_DEFAULT_WIDTH = 600

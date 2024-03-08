@@ -1,19 +1,17 @@
 import React from 'react'
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
+import Container from '@mui/material/Container'
+import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
 import { SelectedAreaContext } from '../SelectedAreaContext'
-import calcRatesOfChange, { RatesOfChange } from '../../utils/calcRatesOfChange'
 import { PopulationData } from './types'
-import CustomAreaChart from './CustomAreaChart'
 
+import PopulationChart from './PopulationChart'
+import ChangeRateChart from './ChangeRateChart'
 
 export default function Dashboard () {
   const { value: selectedArea } = SelectedAreaContext.useValue()
   const [populationData, setPopulationData] = React.useState<PopulationData[]>([])
-  const [ratesOfChange, setRatesOfChange] = React.useState<RatesOfChange[]>([])
 
   React.useEffect(() => {
     if (!selectedArea?.id) return
@@ -22,10 +20,6 @@ export default function Dashboard () {
       .then(setPopulationData)
       .catch(e => console.error(e))
   }, [selectedArea])
-
-  React.useEffect(() => {
-    setRatesOfChange(calcRatesOfChange(populationData))
-  }, [populationData])
 
   return (
     <Container
@@ -45,47 +39,11 @@ export default function Dashboard () {
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} md={8} lg={6}>
-          <Paper
-            sx={{
-              p: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '8px',
-              justifyContent: 'center',
-              height: 550,
-            }}
-          >
-           <CustomAreaChart
-              data={populationData}
-              chartTitle="População pelos anos"
-              tooltipText='População'
-              xAxisProp='ano'
-              areaProp='populacao'
-            />
-          </Paper>
+          <PopulationChart populationData={populationData} />
         </Grid>
 
         <Grid item xs={12} md={4} lg={6}>
-          <Paper
-            sx={{
-              p: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '8px',
-              justifyContent: 'center',
-              height: 550,
-            }}
-          >
-            <CustomAreaChart
-              data={ratesOfChange}
-              chartTitle="Taxa de crescimento pelo anos"
-              tooltipText='Taxa de crescimento'
-              xAxisProp='ano'
-              areaProp='rateOfChange'
-            />
-          </Paper>
+          <ChangeRateChart populationData={populationData} />
         </Grid>
       </Grid>
     </Container>

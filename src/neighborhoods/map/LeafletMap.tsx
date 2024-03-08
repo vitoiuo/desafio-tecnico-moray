@@ -41,7 +41,7 @@ export default function Map() {
     <MapContainer
       center={mapCenter}
       zoom={13}
-      style={{ height: "100%", width: "100%" }}
+      style={{ height: "100vh", width: "100%" }}
       placeholder={<MapPlaceholder />}
     >
       <ChangeView center={mapCenter} zoom={14} />

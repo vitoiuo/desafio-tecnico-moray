@@ -10,15 +10,19 @@ import {
   Tooltip
 } from 'recharts'
 
+interface chartAreas {
+  datakey: string,
+  color: string,
+}
 export interface CustomAreaChartProps {
   data: unknown[],
   chartTitle: string,
   xAxisProp: string,
-  areaProp: string,
+  chartAreas: chartAreas[] | undefined,
   tooltipText?: string,
 }
 
-export default function CustomAreaChart({ data, chartTitle, tooltipText, xAxisProp, areaProp }: CustomAreaChartProps) {
+export default function CustomAreaChart({ data, chartTitle, tooltipText, xAxisProp, chartAreas }: CustomAreaChartProps) {
   return (
     <>
       { data.length
@@ -37,13 +41,16 @@ export default function CustomAreaChart({ data, chartTitle, tooltipText, xAxisPr
             <CartesianGrid strokeDasharray="3 3"  />
             <XAxis dataKey={xAxisProp} />
             <YAxis />
-            <Tooltip formatter={(value, name, props) => [value, tooltipText]} />
-            <Area
-              type="monotone"
-              dataKey={areaProp}
-              stroke="#3F9539"
-              fill="#3F9539"
-              />
+            <Tooltip formatter={value => [value, tooltipText]} />
+            { chartAreas?.map(({ datakey, color }, index) => (
+                <Area
+                  key={index}
+                  type="monotone"
+                  dataKey={datakey}
+                  stroke={color}
+                  fill={color}
+                />
+            ))}
           </AreaChart>
         </ResponsiveContainer>
        </>
