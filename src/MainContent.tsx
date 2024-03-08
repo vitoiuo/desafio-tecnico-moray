@@ -1,8 +1,6 @@
-import React from 'react'
-
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
-import NeighborhoodDash from './bairros/demografia/NeighborhoodDash'
+import Dashboard from './neighborhoods/demography/Dashboard'
 
 export default function MainContent () {
   return (
@@ -11,12 +9,12 @@ export default function MainContent () {
       sx={{
         backgroundColor: (theme) => theme.palette.grey[100],
         flexGrow: 1,
-        height: '100vh',
+        height: '100%',
         overflow: 'auto',
       }}
     >
       <Toolbar />
-      <NeighborhoodDash />
+      <Dashboard />
     </Box>
   )
 }

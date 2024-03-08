@@ -4,6 +4,7 @@ import { LatLngExpression } from '@types/leaflet'
 
 import { SelectedAreaContext } from '../../SelectedAreaContext'
 import { MultiPolygonGeojson } from './types'
+import MapPlaceholder from './MapPlaceHolder'
 import ChangeView from './ChangeViewMap'
 import GeoJSONLayer from './GeoJSONLayer'
 
@@ -38,9 +39,11 @@ export default function Map() {
 
   return (
     <MapContainer
+      dragging={false}
       center={mapCenter}
       zoom={13}
       style={{ height: "100%", width: "100%" }}
+      placeholder={<MapPlaceholder />}
     >
       <ChangeView center={mapCenter} zoom={14} />
       <TileLayer

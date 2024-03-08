@@ -9,7 +9,7 @@ export default function GeoJSONLayer ({ setSelectedArea, ...props}: GeoJsonLayer
   const onEachFeature: GeoJSONOptions['onEachFeature'] = (feature, layer) => {
     layer.on({
       click: function () {
-        setSelectedArea(feature.properties.id)
+        setSelectedArea(feature.properties)
       }
     })
 

@@ -13,7 +13,7 @@ import Drawer from './ui/Drawer'
 import Header from './ui/Header'
 import CustomToolbar from './ui/CustomToolbar'
 import MainContent from './MainContent'
-import LeafletMap from './bairros/mapa/LeafletMap'
+import LeafletMap from './neighborhoods/map/LeafletMap'
 
 export default function App() {
   const DRAWER_DEFAULT_WIDTH = 600
