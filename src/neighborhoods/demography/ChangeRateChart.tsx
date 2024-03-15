@@ -38,7 +38,7 @@ export default function ChangeRateChart ({ populationData }: ChangeRateChartProp
     >
       <CustomAreaChart
         data={ratesOfChange}
-        chartTitle="Taxa de crescimento pelo anos"
+        chartTitle="Taxa de crescimento pelos anos"
         tooltipText='Taxa de crescimento'
         xAxisProp='ano'
         chartAreas={chartAreas}
